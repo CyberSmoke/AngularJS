@@ -1,0 +1,64 @@
+<!Doctype html>
+<html ng-app="customerModule">
+
+	<head>
+		<title>
+			Using Angular to create controllers
+		</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"> </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.js"></script>
+		<script>
+			var customerModule = angular.module("customerModule", ['ngRoute']);
+
+			customerModule.controller( "CustomerController", function($scope)
+			{
+				$scope.customers =
+				[
+					{name: 'Jim', city: 'Bethesda'},
+					{name: 'Jacob', city: 'Fairfax'},
+					{name: 'Robert', city: 'Rockville'},
+					{name: 'Megan', city: 'Silver Spring'}
+				];
+
+				$scope.addCustomer = function()
+				{
+					$scope.customers.push({name: $scope.newCustomer.name, city: $scope.newCustomer.city});
+				};
+			});
+
+			customerModule.config(function($routeProvider)
+			{
+				$routeProvider
+					.when('/',
+					{
+						controller: 'CustomerController',
+						templateUrl: 'test.html'
+					})
+
+					.when('/view2',
+					{
+						controller: 'CustomerController',
+						templateUrl: 'test.html'
+					})
+					.otherwise({redirectTo: '/'});
+			});
+		</script>
+	</head>
+	<body>
+		<div ng-controller="CustomerController">
+			Customer Filter:
+			<input type="text" ng-model="filterName">
+
+			<br/><br/>
+			List of Customers:
+			<ul>
+				<li ng-repeat="customer in customers | filter:filterName | orderBy: 'name'">
+					{{ customer.name | uppercase }} - {{ customer.city | lowercase }}
+				</li>
+			</ul>
+			This has Begun!
+			<!-- Placeholder for views -->
+			<div ng-view></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!Doctype html>
+<html ng-app>
+
+	<head>
+		<title>
+			Using Angular to create controllers
+		</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="SimpleController">
+		Customer Filter:
+		<input type="text" ng-model="filterName">
+
+		<br/><br/>
+		List of Customers:
+		<ul>
+			<li ng-repeat="customer in customers | filter:filterName | orderBy: 'name'">
+				{{ customer.name | uppercase }} - {{ customer.city | lowercase }}
+			</li>
+		</ul>
+		</div>
+
+		<script>
+			function SimpleController( $scope )
+			{
+				$scope.customers = [
+					{ name: 'Jim'	, city: 'Bethesda'	},
+					{ name: 'Jacob'	, city: 'Fairfax'	},
+					{ name: 'Robert', city: 'Rockville'	},
+					{ name: 'Megan'	, city: 'Silver Spring'	}
+				];
+			}
+		</script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"> </script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+	</body>
+</html>
+
