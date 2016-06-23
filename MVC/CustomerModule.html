@@ -10,15 +10,28 @@
 		<script>
 			var customerModule = angular.module("customerModule", ['ngRoute']);
 
-			customerModule.controller( "CustomerController", function($scope)
+			customerModule.factory("customerFactory", function()
 			{
-				$scope.customers =
+				var factory = {};
+				var customers =
 				[
 					{name: 'Jim', city: 'Bethesda'},
 					{name: 'Jacob', city: 'Fairfax'},
 					{name: 'Robert', city: 'Rockville'},
-					{name: 'Megan', city: 'Silver Spring'}
+					{name: 'Megan', city: 'Silver Spring'},
+					{name: 'Vivek', city: 'Rockville'}
 				];
+				
+				factory.getCustomers = function()
+				{
+					return customers;
+				};
+				
+				return factory;
+			});
+			customerModule.controller( "CustomerController", function($scope, customerFactory )
+			{
+				$scope.customers = customerFactory.getCustomers();
 
 				$scope.addCustomer = function()
 				{
