@@ -29,34 +29,23 @@
 			customerModule.config(function($routeProvider)
 			{
 				$routeProvider
-					.when('/',
+					.when('/view1',
 					{
 						controller: 'CustomerController',
-						templateUrl: 'test.html'
+						templateUrl: 'views/view1.html'
 					})
 
 					.when('/view2',
 					{
 						controller: 'CustomerController',
-						templateUrl: 'test.html'
+						templateUrl: 'views/view2.html'
 					})
-					.otherwise({redirectTo: '/'});
+					.otherwise({redirectTo: '/view1'});
 			});
 		</script>
 	</head>
 	<body>
 		<div ng-controller="CustomerController">
-			Customer Filter:
-			<input type="text" ng-model="filterName">
-
-			<br/><br/>
-			List of Customers:
-			<ul>
-				<li ng-repeat="customer in customers | filter:filterName | orderBy: 'name'">
-					{{ customer.name | uppercase }} - {{ customer.city | lowercase }}
-				</li>
-			</ul>
-			This has Begun!
 			<!-- Placeholder for views -->
 			<div ng-view></div>
 		</div>
