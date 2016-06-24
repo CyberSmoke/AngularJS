@@ -41,12 +41,29 @@
 	app.controller("ReviewController", function()
 	{
 		this.newReview = {};
+		this.newReview.createdOn = Date.now();
 		this.addReview = function( product )
 		{
 			product.reviews.push( this.newReview );
 			this.newReview = {};
 		};
 
+	});
+
+	app.directive('productTitle', function()
+	{
+		return {
+			restrict: 'E', //E stands for Element
+			templateUrl: 'product-title.html'
+		};
+	});
+
+	app.directive('productSpecs', function()
+	{
+		return{
+			restrict: 'A',
+			templateUrl: 'product-specs.html'
+		};
 	});
 
 	var gems = [
